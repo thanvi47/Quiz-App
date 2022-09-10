@@ -23,5 +23,12 @@ class Quiz extends Model
     public function allQuiz(){
         return Quiz::all();
     }
+    public function updateQuiz($data,$id){
+        return Quiz::find($id)->update($data);
+    }
+        public function deleteQuiz($data,$id){
+        return Quiz::find($id)->delete();
+    }
+
     use HasFactory;
 }
