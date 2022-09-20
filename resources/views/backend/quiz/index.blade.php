@@ -25,7 +25,7 @@
                             <th>Description</th>
                             <th>Minutes</th>
                             <th>Edit</th>
-                            <th>Delete</th>
+{{--                            <th>Delete</th>--}}
                         </tr>
                         </thead>
                         <tbody>
