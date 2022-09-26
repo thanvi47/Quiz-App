@@ -68,13 +68,15 @@ class QuestionController extends Controller
 //
 //
 //        }
-//          dd('boo');
+
         $data = $this->validateForm($request);
+//        dd($data);
         $question=(new Question())->storeQuestion($data);
+        $a=$question->id;
+        $answer = (new Answer())->storeAnswer($data,$a);
+//        dd($answer);
 
-        $Answer = (new Answer())->storeAnswer($data,$question);
-
-        return redirect()->route('backend.question.create')->with('message','Question created successfully');
+        return redirect()->back()->with('message','Question created successfully');
 
     }
 
@@ -126,8 +128,8 @@ class QuestionController extends Controller
         return $this->validate($request,[
            'quiz'=>'required',
            'question'=>'required',
-           'options'=>'bail|required|array|',
-           'options.*'=>'bail|required|string|distinct',
+           'options'=>'|required||',
+           'options.*'=>'|required||',
             'correct_answer'=>'required'
         ]);
     }

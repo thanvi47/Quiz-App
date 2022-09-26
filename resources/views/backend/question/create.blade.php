@@ -18,12 +18,13 @@
                   <div class="control-group">
                       <label for=""class="control-label">Choose Quiz</label>
                       <div class="controls">
-                          @foreach(\App\Models\Quiz::all() as $quiz)
-                          <select name="quiz" id="" class="span8 ">
-                              <option value="{{$quiz->id}}">{{$quiz->name}}</option>
 
+                          <select name="quiz" id="" class="span8 ">
+                              @foreach(\App\Models\Quiz::all() as $quiz)
+                              <option value="{{$quiz->id}}">{{$quiz->name}}</option>
+                              @endforeach
                           </select>
-                          @endforeach
+
                           <br> @error('quiz')
                           <span class="invalid-feedback" role="alert">
                               <strong class="">{{$message}}</strong>

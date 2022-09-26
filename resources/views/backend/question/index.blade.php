@@ -13,7 +13,7 @@
             <div class="module">
                 <div class="module-head">
                     <h3>All Quiz</h3>
-                    <a class="float-right" href="{{route('quiz.create')}}"><button class="btn btn-outline-secondary float-end">Create Quiz</button></a>
+                    <a class="float-right" href="{{route('question.create')}}"><button class="btn btn-outline-secondary float-end">Create Quiz</button></a>
                 </div>
                 <div class="module-body">
 
@@ -29,7 +29,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($quizzes as $key=>$quiz)
+                        @foreach($questions as $key=>$quiz)
                         <tr>
                             <td>{{$key+1}}</td>
                             <td>{{$quiz->name}}</td>

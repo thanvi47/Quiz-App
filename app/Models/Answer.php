@@ -8,6 +8,12 @@ use App\Models\Question;
 
 class Answer extends Model
 {
+    use HasFactory;
+    //table name
+    protected $table='answers';
+    //primary key
+    public $primaryKey='id';
+
     protected $fillable = [
         'question_id',
         'answer',
@@ -17,19 +23,30 @@ class Answer extends Model
     public function question(){
         return $this->belongsTo(Question::class);
 }
-    public function storeAnswer($data,$question){
-        foreach ($data['options'] as $key => $option ){
+    public function storeAnswer($data,$a){
+        $dataoptions= $data['options'];
+//        dd($dataoptions);
+        foreach ($dataoptions as $key => $option ){
             $is_correct=false;
             if($key==$data['correct_answer']){
                 $is_correct=true;
             }
-            $answer =Answer::create([
-               'question_id'=>$question->id,
-               'answer'=>$option,
-                'is_correct'=>$is_correct
-            ]);
 
+            $answer = new Answer;
+            $answer->question_id=$a;
+            $answer->answer=$option;
+            $answer->is_correct=$is_correct;
+            $answer->save();
         }
     }
+//            $answer =Answer::create([
+//               'qurstion_id'=>$a,
+//
+//               'answer'=>$option,
+//                'is_correct'=>$is_correct
+//            ]);
+//
+//        }
+
     use HasFactory;
 }
