@@ -12,7 +12,7 @@
             @endif
             <div class="module">
                 <div class="module-head">
-                    <h3>All Quiz</h3>
+                    <h3>All Question</h3>
                     <a class="float-right" href="{{route('question.create')}}"><button class="btn btn-outline-secondary float-end">Create Quiz</button></a>
                 </div>
                 <div class="module-body">
@@ -21,22 +21,27 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th> Name</th>
-                            <th>Description</th>
-                            <th>Minutes</th>
+                            <th> Question</th>
+                            <th>Quiz</th>
+                            <th>Created</th>
+                            <th>View</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($questions as $key=>$quiz)
+                        @foreach($questions as $key=>$question)
                         <tr>
                             <td>{{$key+1}}</td>
-                            <td>{{$quiz->name}}</td>
-                            <td>{{$quiz->description}}</td>
-                            <td>{{$quiz->minutes}}</td>
+                            <td>{{$question->question}}</td>
+                            <td>{{$question->quiz->name}}</td>
+                            <td>{{date('F ,d,Y',strtotime($question->created_at))}}</td>
                             <td>
-                                <a class="float-right" href="{{route('quiz.edit',$quiz->id)}}" >
+                                <a href="{{route('question.show',$question->id)}}">
+                                    <button class="btn btn-primary">View</button></a>
+                            </td>
+                            <td>
+                                <a class="float-right" href="{{route('question.edit',$question->id)}}" >
                                     <button class="btn btn-secondary ">Edit</button></a>
 
 
@@ -46,7 +51,7 @@
 
                             <td>
 
-                                <form action="{{route('quiz.destroy',$quiz->id)}}" method="post">
+                                <form action="{{route('question.destroy',$question->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
 
@@ -62,7 +67,10 @@
                         </tbody>
                     </table>
                     <!-- Modal -->
+                    <div class="pagination pagination-centered">
 
+                        {{$questions->links()}} </div>
+{{--            {{$questions->links()}}--}}
 
                 </div>
             </div><!--/.module-->

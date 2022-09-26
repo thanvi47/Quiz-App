@@ -12,6 +12,8 @@ class Question extends Model
     'question',
     'quiz_id',
     ];
+    private $limit =10;
+    private $order ='desc';
     public function answer(){
         return $this->hasMany(Answer::class);
     }
@@ -24,9 +26,13 @@ class Question extends Model
         return Question::create($data);
 
     }
-//    public function allQuiz(){
-//        return Question::all();
-//    }
+    public function getQuestion(){
+        return Question::orderBy('Created_at',$this->order)->with('quiz')->paginate($this->limit);
+    }
+    public function getQuestionById($id){
+        return Question::findOrfail($id);
+    }
+
 //    public function updateQuiz($data,$id){
 //        return Question::find($id)->update($data);
 //    }

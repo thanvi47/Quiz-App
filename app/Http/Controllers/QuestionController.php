@@ -16,7 +16,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-    $questions=Question::all();
+    $questions=(new Question)->getQuestion();
     return view('backend.question.index',compact('questions'));
     }
 
@@ -88,7 +88,8 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        //
+$question =(new Question())->getQuestionById($id);
+        return view('backend.question.show',compact('question'));
     }
 
     /**
@@ -122,7 +123,7 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
     public function validateForm($request){
         return $this->validate($request,[

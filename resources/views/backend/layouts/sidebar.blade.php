@@ -12,7 +12,9 @@
                         </li>
                         <li><a href="{{route('quiz.index')}}"><i class="menu-icon icon-inbox"></i>Quiz View
                             </a> </li>
-                        <li><a href="task.html"><i class="menu-icon icon-tasks"></i>Tasks
+                        <li><a href="{{route('question.index')}}"><i class="menu-icon icon-tasks"></i>Qustion View
+                                     </a></li>
+                        <li><a href="{{route('question.create')}}"><i class="menu-icon icon-tasks"></i>Qustion Create
                                      </a></li>
                     </ul>
                     <!--/.widget-nav-->
