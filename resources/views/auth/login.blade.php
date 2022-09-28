@@ -6,7 +6,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
-
+                @if(Session::has('message'))
+                    <div class="alert alert-warning "><b style="color:#810000FF;">{{Session::get('message')}}</b> </div>
+                @endif
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

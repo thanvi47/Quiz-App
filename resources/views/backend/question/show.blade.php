@@ -1,21 +1,24 @@
 @extends('backend.layouts.master')
 @section('title','Question')
 @section('content')
-    <div class="span8 ">
-        <div class="container m-5 ">
-            <div class="row justify-content-center">
-
-                <div class='module-body table ms-5 p-5 ' style="padding:0px 40px;">
-                    <table class='table table-message '>
+    <div class="span9 ">
+        <div class="content">
+{{--            <div class="row justify-content-center">--}}
+                @if(Session::has('message'))
+                    <div class="alert alert-success">{{Session::get('message')}}</div>
+                @endif
+                    <div class="module">
+                <div class='module-body ' >
+                    <table class='table table-striped'>
                         <thead>
                         <th>
                             <h3>{{ $question->question }}</h3>
                         </th>
                         </thead>
                         <tbody>
-                        @foreach($question->answer as $key=> $answer)
-                            <tr class='read'>
-                                <td class="cell-author hidden-phone hidden-tablet">
+                        @foreach($question->answers as $key=> $answer)
+                            <tr>
+                                <td >
                                     {{$key+1}}. {{$answer->answer}} @if($answer->is_correct)
                                         <span class="badge badge-success pull-right"><b>Correct</b></span>
                                     @endif
@@ -30,6 +33,7 @@
 
 
             </div>
+{{--            </div>--}}
         </div>
     </div>
 

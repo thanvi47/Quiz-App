@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -27,6 +28,7 @@ class User extends Authenticatable
         'phone',
         'is_admin',
     ];
+    private $limit = 10;
 
     /**
      * The attributes that should be hidden for serialization.
@@ -46,4 +48,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function storeUser($data){
+        $data['visible_password'] = $data['password'];
+        $data['password'] = bcrypt($data['password']);
+        $data['is_admin'] = 0;
+        $this->create($data);
+
+    }
+    public function allUsers(){
+        return User::all();
+//        ->paginate($this->limit);
+    }
+    public function updateUser($data, $id){
+        $data['visible_password'] = $data['password'];
+        $data['password'] = bcrypt($data['password']);
+        $data['is_admin'] = 0;
+        $this->find($id)->update($data);
+    }
 }

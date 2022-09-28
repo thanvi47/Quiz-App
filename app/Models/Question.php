@@ -14,7 +14,7 @@ class Question extends Model
     ];
     private $limit =10;
     private $order ='desc';
-    public function answer(){
+    public function answers(){
         return $this->hasMany(Answer::class);
     }
     public function quiz(){
@@ -32,12 +32,24 @@ class Question extends Model
     public function getQuestionById($id){
         return Question::findOrfail($id);
     }
+    public function findQuestion($id){
+        return Question::findOrfail($id);
+    }
 
-//    public function updateQuiz($data,$id){
-//        return Question::find($id)->update($data);
-//    }
-//    public function deleteQuiz($data,$id){
-//        return Question::find($id)->delete();
-//    }
+    public function updateQuestion($id,$data){
+
+        $question = Question::findOrfail($id);
+
+        $question->question=$data['question'];
+        $question->quiz_id=$data['quiz'];
+        $question->save();
+        return $question;
+    }
+
+    public function deleteQuestion($id){
+        $question = Question::findOrfail($id);
+        $question->delete();
+    }
+
     use HasFactory;
 }

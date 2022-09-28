@@ -50,7 +50,8 @@ class QuizController extends Controller
      */
     public function show($id)
     {
-        //
+        $quizes=Quiz::with('questions')->where('id',$id)->get();
+        return view('backend.quiz.show',compact('quizes'));
     }
 
     /**
@@ -61,6 +62,7 @@ class QuizController extends Controller
      */
     public function edit($id)
     {
+
         $quiz=Quiz::find($id);
         return view('backend.quiz.edit',compact('quiz'));
     }

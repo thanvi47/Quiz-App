@@ -39,35 +39,7 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-//        $request->validate([
-////            'quiz'=>'required',
-////            'question'=>'required',
-////            'options'=>'bail|required|array|',
-////            'options.*'=>'bail|required|string|distinct',
-////            'correct_answer'=>'required'
-//        ]);
-//        dd($request);
 
-//        $question=new Question;
-//        $question->quiz_id=$request['quiz'];
-//        $question->question=$request['question'];
-//        $question->save();
-//        $data = $this->validateForm($request);
-//
-//        $answer = new Answer;
-//        foreach ($data['options'] as $key => $option ){
-//            $is_correct=false;
-//            dd($data['options']);
-//            if($key==$request['correct_answer']){
-//                $is_correct=true;
-//            }
-//
-//              $answer-> question_id=$question->id;
-//             $answer->   answer=$option;
-//              $answer->  is_correct=$is_correct;
-//
-//
-//        }
 
         $data = $this->validateForm($request);
 //        dd($data);
@@ -88,8 +60,8 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-$question =(new Question())->getQuestionById($id);
-        return view('backend.question.show',compact('question'));
+        $question = (new Question())->getQuestionById($id);
+        return view('backend.question.show', compact('question'));
     }
 
     /**
@@ -100,7 +72,8 @@ $question =(new Question())->getQuestionById($id);
      */
     public function edit($id)
     {
-        //
+        $question =(new Question())->findQuestion($id);
+        return view('backend.question.edit' ,compact('question'));
     }
 
     /**
@@ -112,7 +85,12 @@ $question =(new Question())->getQuestionById($id);
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $this->validateForm($request);
+        ;
+        $question=(new Question())->updateQuestion($id,$request->all());
+
+        $answer = (new Answer())->updateAnswer($request->all(),$question);
+        return redirect()->route('question.index')->with('message','Question updated successfully');
     }
 
     /**
@@ -123,7 +101,9 @@ $question =(new Question())->getQuestionById($id);
      */
     public function destroy($id)
     {
-
+        (new Answer())->deleteAnswer($id);
+        (new Question())->deleteQuestion($id);
+        return redirect()->back()->with('message','Question deleted successfully');
     }
     public function validateForm($request){
         return $this->validate($request,[

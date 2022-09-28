@@ -11,9 +11,9 @@
                 <div class="alert alert-success">{{Session::get('message')}}</div>
             @endif
             <div class="module">
-                <div class="module-head">
+                <div class="module-head float-end">
                     <h3>All Question</h3>
-                    <a class="float-right" href="{{route('question.create')}}"><button class="btn btn-outline-secondary float-end">Create Quiz</button></a>
+                    <a class="float-right" style="float: right;margin-top: -25px;" href="{{route('question.create')}}"><button class="btn btn-inverse float-right">Create Question</button></a>
                 </div>
                 <div class="module-body">
 
@@ -42,7 +42,7 @@
                             </td>
                             <td>
                                 <a class="float-right" href="{{route('question.edit',$question->id)}}" >
-                                    <button class="btn btn-secondary ">Edit</button></a>
+                                    <button class="btn btn-warning ">Edit</button></a>
 
 
 
