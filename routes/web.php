@@ -32,3 +32,4 @@ Route::resource('user','App\Http\Controllers\UserController');
 Route::get('quiz/{id}/question','App\Http\Controllers\QuizController@question')->name('quiz.question');
 
 });
+Route::resource('exam','App\Http\Controllers\ExamController');

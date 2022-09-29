@@ -26,6 +26,12 @@
                         <li><a href="{{route('user.create')}}"><i class="menu-icon icon-tasks"></i>User Create
                                      </a></li>
                     </ul>
+                    <ul class="widget widget-menu unstyled">
+                        <li><a href="{{route('exam.create')}}"><i class="menu-icon icon-tasks"></i>Assign Exam
+                                     </a></li>
+                        <li><a href="{{route('exam.index')}}"><i class="menu-icon icon-tasks"></i>View User Exam
+                                     </a></li>
+                    </ul>
                     <!--/.widget-nav-->
 
 
