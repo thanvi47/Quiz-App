@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ExamController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +22,7 @@ Auth::routes([
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('examquiz/{quizId}','App\Http\Controllers\ExamController@getQuizQuestions')->middleware('auth');
 Route::group(['middleware'=>'isAdmin'],function(){
     Route::get('/', function () {
         return view('admin.index');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\Result;
 use Illuminate\Http\Request;
@@ -101,6 +102,16 @@ class ExamController extends Controller
                 $quiz->users()->detach($userId);
                 return redirect()->back()->with('message','Exam Removed Successfully');
             }
+
+
+    }
+    public function getQuizQuestions(Request $request,$quizId){
+    $authUser=auth()->user()->id;
+    $quiz=Quiz::findOrFail($quizId);
+    $time=Quiz::Where('id',$quizId)->value('minutes');
+    $quizQuestions=Question::Where('quiz_id',$quizId)->with('answers')->get();
+    $authUserHasPlayedQuiz=Result::Where(['user_id'=>$authUser,'quiz_id'=>$quizId])->get();
+    return view('exam.examquiz',compact('quizQuestions','quiz','time','authUserHasPlayedQuiz'));
 
 
     }

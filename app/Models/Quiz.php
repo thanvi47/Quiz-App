@@ -39,6 +39,14 @@ class Quiz extends Model
         $userId=$data['user_id'];
         return $quiz->users()->syncWithoutDetaching($userId);
     }
+    public function hasQuizAttempted(){
+        $attemptedQuiz=[];
+        $authUser=auth()->user()->id;
+        $user=Result::Where('user_id',$authUser)->get();
+        foreach($user as $u){
+         array_push($attemptedQuiz,$u->quiz_id);
 
+        }return $attemptedQuiz;
+    }
     use HasFactory;
 }
