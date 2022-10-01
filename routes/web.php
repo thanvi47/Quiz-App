@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExamController;
+use App\Models\Question;
+use App\Models\Quiz;
+use App\Models\Result;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +26,10 @@ Auth::routes([
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('examquiz/{quizId}','App\Http\Controllers\ExamController@getQuizQuestions')->middleware('auth');
+
+Route::post('examquiz/store',[App\Http\Controllers\ExamController::class ,'postQuiz'])->name('quiz.store')->middleware('auth');
+Route::get('/result/user/{userId}/quiz/{quizId}',[App\Http\Controllers\ExamController::class ,'viewResult'])->name('result')->middleware('auth');
+
 Route::group(['middleware'=>'isAdmin'],function(){
     Route::get('/', function () {
         return view('admin.index');
@@ -34,3 +41,4 @@ Route::get('quiz/{id}/question','App\Http\Controllers\QuizController@question')-
 
 });
 Route::resource('exam','App\Http\Controllers\ExamController');
+

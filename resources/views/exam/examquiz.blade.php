@@ -15,9 +15,7 @@
 
 </quiz-component>
 
-    <ExampleComponent>
 
-    </ExampleComponent>
 
 
 

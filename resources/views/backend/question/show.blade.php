@@ -1,4 +1,5 @@
 @extends('backend.layouts.master')
+@extends('layouts.app')
 @section('title','Question')
 @section('content')
     <div class="span9 ">

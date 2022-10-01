@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Question;
 use App\Models\Answer;
 class Result extends Model
-{protected $fillable = [
+{
+
+    protected $fillable = [
     'user_id',
     'question_id',
     'quiz_id',
