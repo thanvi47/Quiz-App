@@ -7,7 +7,7 @@
                     <span class="float-end">{{questionIndex}}/{{questions.length}}</span></div>
 
                     <div class="card-body">
-                        <span> {{time}}</span>
+                        <span class="float-end text-danger"> {{time}}</span>
                         <div v-for="(question,index) in questions">
                         <div v-show="index==questionIndex">
 
@@ -54,7 +54,7 @@
 
 <script>
 import moment from "moment";
-
+require('../bootstrap');
 export default {
 
     props: ['quizid', 'quizQuestions', 'hasQuizPlayed', 'times'],
@@ -65,7 +65,7 @@ export default {
             userResponses: Array(this.quizQuestions.length).fill(false),
             currentQuestion:0,
             currentAnswer:0,
-            clock:moment(this.time*60*1000),
+            clock:moment(this.times*60*1000),
         }
     },
     mounted() {

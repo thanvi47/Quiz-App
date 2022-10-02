@@ -4,11 +4,11 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
 
+require('./bootstrap');
 import Vue from 'vue';
 import App from './components/ExampleComponent.vue';
-var moment = require('moment');
+
 
 /**
  * The following block of code may be used to automatically register your

@@ -110,7 +110,7 @@ class ExamController extends Controller
     $authUser=auth()->user()->id;
     //check if user has been assignrd a particular quiz
         $userId=DB::table('quiz_users')->where('user_id',$authUser)->where('quiz_id',$authUser)->pluck('quiz_id')->toArray();
-        if (!in_array($quizId,$userId)) {
+        if (in_array($quizId,$userId)) {
             return redirect()->to('/home')->with('error','You are not assigned to this quiz');
         }
 
