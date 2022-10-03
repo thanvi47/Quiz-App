@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@extends('layouts.app')
+{{--@extends('layouts.app')--}}
 @section('title','Question')
 @section('content')
     <div class="span9 ">
@@ -12,17 +12,36 @@
                 <div class='module-body ' >
                     <table class='table table-striped'>
                         <thead>
-                        <th>
-                            <h3>{{ $question->question }}</h3>
-                        </th>
+                        <th>#</th>
+                        <th>Quiz Name</th>
+                       <th>Total Question</th>
+                        <th>Attempt Question</th>
+                        <th>Correct Answer</th>
+                        <th>Wrong Answer</th>
+                        <th>Percentage</th>
                         </thead>
                         <tbody>
-                        @foreach($question->answers as $key=> $answer)
+                        @foreach($quizzes as $key=>$quiz)
                             <tr>
-                                <td >
-                                    {{$key+1}}. {{$answer->answer}} @if($answer->is_correct)
-                                        <span class="badge badge-success pull-right"><b>Correct</b></span>
-                                    @endif
+                                <td>{{$key+1}}</td>
+                                <td>
+                                    {{$quiz->name}}
+
+                                </td>
+                                <td>
+                                    {{$totalQuestions}}
+                                </td>
+                                <td>
+                                    {{$attemptedQuestions}}
+                                </td>
+                                <td>
+                                    {{$userCorrectAnswers}}
+                                </td>
+                                <td>
+                                    {{$userWrongAnswers}}
+                                </td>
+                                <td>
+                                    {{round($percentage,2)}}
                                 </td>
 
 

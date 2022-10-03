@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\Result;
@@ -156,7 +157,7 @@ class ExamController extends Controller
         $results=Result::where('user_id',$userId)->where('quiz_id',$quizId)->get();
         $totalQuestions=Question::where('quiz_id',$quizId)->count();
       $attemptedQuestions=Result::where('user_id',$userId)->where('quiz_id',$quizId)->count();
-        $quiz=Quiz::where('id',$quizId)->get();
+        $quizzes=Quiz::where('id',$quizId)->get();
         $ans=[];
         foreach ($results as $answer){
             array_push($ans,$answer->answer_id);
@@ -164,7 +165,13 @@ class ExamController extends Controller
         }
         $userCorrectAnswers=Answer::whereIn('id',$ans)->where('is_correct',1)->count();
         $userWrongAnswers=$totalQuestions-$userCorrectAnswers;
-        $percentage=($userCorrectAnswers/$totalQuestions)*100;
-        return view('backend.result.result',compact('results','totalQuestions','attemptedQuestions','userCorrectAnswers','userWrongAnswers','percentage','quiz'));
+        if ($attemptedQuestions){
+            $percentage=($userCorrectAnswers/$totalQuestions)*100;
+        }else{
+            $percentage=0;
+        }
+
+
+        return view('backend.result.show',compact('results','totalQuestions','attemptedQuestions','userCorrectAnswers','userWrongAnswers','percentage','quizzes'));
     }
 }
