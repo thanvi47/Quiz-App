@@ -38,6 +38,8 @@ Route::resource('quiz','App\Http\Controllers\QuizController');
 Route::resource('question','App\Http\Controllers\QuestionController');
 Route::resource('user','App\Http\Controllers\UserController');
 Route::get('quiz/{id}/question','App\Http\Controllers\QuizController@question')->name('quiz.question');
+Route::get('result',[App\Http\Controllers\ExamController::class ,'result']);
+Route::get('result/{userId}/{quizId}',[App\Http\Controllers\ExamController::class ,'userQuizResult']);
 
 });
 Route::resource('exam','App\Http\Controllers\ExamController');

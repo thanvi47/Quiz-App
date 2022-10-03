@@ -148,4 +148,23 @@ class ExamController extends Controller
         return view('result-detail',compact('results'));
 
     }
+    public function result(){
+        $quizzes=Quiz::all();
+        return view('backend.result.index',compact('quizzes'));
+    }
+    public function userQuizResult($userId,$quizId){
+        $results=Result::where('user_id',$userId)->where('quiz_id',$quizId)->get();
+        $totalQuestions=Question::where('quiz_id',$quizId)->count();
+      $attemptedQuestions=Result::where('user_id',$userId)->where('quiz_id',$quizId)->count();
+        $quiz=Quiz::where('id',$quizId)->get();
+        $ans=[];
+        foreach ($results as $answer){
+            array_push($ans,$answer->answer_id);
+
+        }
+        $userCorrectAnswers=Answer::whereIn('id',$ans)->where('is_correct',1)->count();
+        $userWrongAnswers=$totalQuestions-$userCorrectAnswers;
+        $percentage=($userCorrectAnswers/$totalQuestions)*100;
+        return view('backend.result.result',compact('results','totalQuestions','attemptedQuestions','userCorrectAnswers','userWrongAnswers','percentage','quiz'));
+    }
 }
