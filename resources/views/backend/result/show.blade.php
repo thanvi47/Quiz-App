@@ -49,6 +49,47 @@
                         @endforeach
                         </tbody>
                     </table>
+
+
+
+
+                    <table class='table table-striped'>
+                        <thead>
+                        <th>#</th>
+
+                       <th>Question</th>
+
+                        <th>Answer</th>
+                        <th>Result </th>
+{{--                        <th>Percentage</th>--}}
+                        </thead>
+                        <tbody>
+                        @foreach($results as $key=>$result)
+                            <tr>
+                                <td>{{$key+1}}</td>
+                                <td>
+                                    {{$result->question->question}}
+
+                                </td>
+                                <td>
+                                    {{$result->answer->answer}}
+                                </td>
+                                @if($result->answer->is_correct)
+                                    <td>
+                                        <span class="badge badge-success" >Correct</span>
+                                    </td>
+                                @else
+                                <td>
+                                    <span class="badge badge-danger" style="color: #ffff ;background:#ce2916;">Wrong</span>
+                                </td>
+                                @endif
+
+
+
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
 
 

@@ -27,9 +27,9 @@
                         }
                         @endphp
                         @if($result->answer->is_correct)
-                            <b class=""> <span class="text-success  "> Correct</span></b>
+                            <b class=""> <span class="badge badge-success" style=" color: #ffff ;background:#084f03;"> Correct</span></b>
                         @else
-                           <span class="badge text-danger"> <b> Wrong</b></span>
+                           <span class="badge" style=" color: #ffff ;background:#ce2916;"> <b> Wrong</b></span>
                         @endif
                     </div>
                 </div>

@@ -15,7 +15,13 @@
 
 </quiz-component>
 
+<script type="text/javascript">
+    window.oncontextmenu=function () {
+        console.log('You are not allowed to open the contest menu');
+        return false
+    }
 
+</script>
 
 
 
